@@ -21,7 +21,7 @@
       }
       .btn-load {
         margin-bottom: 30px;
-        background-color: #007bff;
+        background-color: #ff00e7;
         color: white;
         font-size: 18px;
         padding: 12px 30px;
@@ -31,9 +31,14 @@
         text-align: center;
       }
       .btn-load:hover {
-        background-color: #0056b3;
+        border: 2px solid #ff00e7;
       }
-
+      #sort {
+          height: 30px;
+          width: 150px;
+          font-size: 17px;
+          padding: 0 7px;
+      }
       .product-card {
         background-color: white;
         border-radius: 10px;
@@ -186,8 +191,8 @@
   </head>
   <body>
     <select name="sort" id="sort">
-        <option value="asc" selected>Asc</option>
-        <option value="desc">Desc</option>
+        <option value="asc" selected>Low Price</option>
+        <option value="desc">High Price</option>
     </select>
     <div class="loader">
       <div id="box-container">
