@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch-Categories</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+
+        body {
+             font-family: "Montserrat Subrayada", serif;
+            background: linear-gradient(135deg, #f0f4f8, #c9e2f6);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: #ffffff;
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #444;
+            font-size: 36px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+       table {
+		    width: 100%;
+		    border-collapse: collapse;
+		    margin-top: 30px;
+		    border-radius: 12px;
+		    overflow: hidden;
+		    box-shadow: 0px 10px 20px 7px rgba(0, 0, 0, 0.08);
+		}
+
+        table thead {
+            background-color: #4A90E2;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            border-bottom: 2px solid #4A90E2;
+        }
+
+        table th, table td {
+		    padding: 18px;
+		    text-align: center;
+		    font-size: 20px;
+		    font-weight: 300;
+		}
+
+        table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tbody tr:hover {
+            background-color: #eef6fc;
+        }
+
+        table tfoot {
+            background-color: #4c73264d;
+            color: #000;
+        }
+        #table {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            font-size: 18px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        #table:hover {
+            background-color: #357ABD;
+            transform: scale(1.05);
+        }
+
+        #table:focus {
+            outline: none;
+        }
+        #newtable tbody tr td {
+            text-align: center;
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>User Information Table</h1>
+
+        <table id="newtable">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>First Name</th>
+                    <th>Maiden Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td colspan="4">No Data</td>
+                </tr>
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <th colspan="4">Ravi@.com</th>
+                </tr>
+            </tfoot>
+        </table>
+
+        <button id="table">Load Users Data</button>
+    </div>
+
+    <script>
+        jQuery(document).ready(function() {
+            jQuery("#table").click(function() {
+                jQuery.ajax({
+                    url: 'https://dummyjson.com/users',
+                    type: 'GET',
+                    success: (response) => {
+                        let tbody_rows = '';
+                        for (user of response.users) {
+                            tbody_rows += `
+                                <tr>
+                                    <td><img src="${user.image}</td>
+                                    <td>${user.firstName}</td>
+                                    <td>${user.maidenName}</td>
+                                    <td>${user.lastName}</td>
+                                    <td>${user.age}</td>
+                                </tr>
+                            `;
+                        }
+                        jQuery('#newtable tbody').html(tbody_rows);
+                    },	
+                    error: (error) => {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
